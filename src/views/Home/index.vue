@@ -2,13 +2,13 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-14 10:40:20
- * @LastEditTime: 2022-01-17 13:10:37
+ * @LastEditTime: 2022-01-17 18:01:19
 -->
 <template>
   <div class="homepage">
     <NSpace justify="center" style="gap: 10px;">
-      <Banner></Banner>
       <NewSong></NewSong>
+      <Banner></Banner>
     </NSpace>
   </div>
 </template>

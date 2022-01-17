@@ -2,7 +2,7 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-14 10:43:56
- * @LastEditTime: 2022-01-17 13:25:47
+ * @LastEditTime: 2022-01-17 17:52:43
 -->
 <template>
   <NSpace class="new-song" vertical>
@@ -38,7 +38,7 @@ const handleUpdateValue = (val) => {
 <style scoped lang='scss' >
 .new-song {
   text-align: left;
-  // width: calc(100vw - 270px);
+  width: calc(100vw - 270px);
   .title {
     font-size: 2.25rem;
     font-weight: 500;

@@ -2,7 +2,7 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-13 13:38:36
- * @LastEditTime: 2022-01-17 11:30:22
+ * @LastEditTime: 2022-01-17 17:57:28
 -->
 <template>
   <NLayoutSider class="sider" content-style="padding: 24px;" bordered>
@@ -25,7 +25,7 @@
   </NLayoutSider>
   <teleport to="body">
     <NModal
-      class="w-3/12"
+      class="login-model"
       v-model:show="showModal"
       preset="card"
       title="登录"
@@ -102,14 +102,18 @@ const handleValidateClick = (e) => {
   })
 }
 </script>
-<style lang="scss">
+<style  lang="scss">
+.login-model {
+  width: 33.333333%;
+}
 .login-btn {
   .n-form-item-blank {
-    @apply justify-center;
+    justify-content: center;
   }
 }
 .sider {
   text-align: center;
+
   .sider-item {
     display: flex;
     gap: 0.25rem;
@@ -117,10 +121,12 @@ const handleValidateClick = (e) => {
   }
   .n-menu-item {
     &:before {
-      @apply left-0 right-0;
+      left: 0;
+      right: 0;
     }
     &:hover {
-      @apply left-0 right-0;
+      left: 0;
+      right: 0;
     }
   }
 }

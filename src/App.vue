@@ -2,28 +2,30 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-17 11:01:05
- * @LastEditTime: 2022-01-17 13:30:17
+ * @LastEditTime: 2022-01-17 18:00:40
 -->
 <template>
-  <NMessageProvider>
-    <NConfigProvider
-      class="wrapper"
-      :theme="app.nightMode === 'darkTheme' ? darkTheme : null"
-      :theme-overrides="app.theme === 'netease' ? themeOverrides : {}"
-    >
-      <NLayout has-sider class="layout">
-        <Sider></Sider>
-        <NLayout :native-scrollbar="true">
-          <NLayoutContent :native-scrollbar="false">
-            <suspense>
-              <router-view />
-            </suspense>
-          </NLayoutContent>
+  <NScrollbar>
+    <NMessageProvider>
+      <NConfigProvider
+        class="wrapper"
+        :theme="app.nightMode === 'darkTheme' ? darkTheme : null"
+        :theme-overrides="app.theme === 'netease' ? themeOverrides : {}"
+      >
+        <NLayout has-sider class="layout">
+          <Sider></Sider>
+          <NLayout :native-scrollbar="true">
+            <NLayoutContent :native-scrollbar="true" style="margin: 60px">
+              <suspense>
+                <router-view />
+              </suspense>
+            </NLayoutContent>
+          </NLayout>
         </NLayout>
-      </NLayout>
-      <NGlobalStyle></NGlobalStyle>
-    </NConfigProvider>
-  </NMessageProvider>
+        <NGlobalStyle></NGlobalStyle>
+      </NConfigProvider>
+    </NMessageProvider>
+  </NScrollbar>
 </template>
 <script setup>
 import { useApp } from "@/store/modules/app";
