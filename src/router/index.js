@@ -1,26 +1,52 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+/*
+ * @Description: 输入文件描述信息
+ * @Author: liu-wb
+ * @Date: 2022-01-17 11:01:05
+ * @LastEditTime: 2022-01-17 11:28:06
+ */
+
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: '/',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Home/index.vue')
   },
   {
-    path: "/about",
-    name: "About",
+    path: '/recommend',
+    name: 'Recommend',
+    component: () => import(/* webpackChunkName: "recommend" */ '@/views/Recommend/index.vue')
+  },
+  {
+    path: '/rank',
+    name: 'Rank',
+    component: () => import(/* webpackChunkName: "rank" */ '@/views/Rank/index.vue')
+  },
+  {
+    path: '/singer',
+    name: 'Singer',
+    component: () => import(/* webpackChunkName: "singer" */ '@/views/Singer/index.vue')
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: () => import(/* webpackChunkName: "category" */ '@/views/Category/index.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-];
+      import(/* webpackChunkName: "about" */ '../views/About.vue')
+  }
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
