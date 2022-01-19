@@ -2,7 +2,7 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-17 11:01:05
- * @LastEditTime: 2022-01-17 11:28:06
+ * @LastEditTime: 2022-01-19 10:28:48
  */
 
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -27,6 +27,21 @@ const routes = [
     path: '/singer',
     name: 'Singer',
     component: () => import(/* webpackChunkName: "singer" */ '@/views/Singer/index.vue')
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: () => import(/* webpackChunkName: "category" */ '@/views/Category/index.vue')
+  },
+  {
+    path: '/singer-detail',
+    name: 'SingerDetail',
+    component: () => import(/* webpackChunkName: "category" */ '@/views/Detail/Singer')
+  },
+  {
+    path: '/album-detail',
+    name: 'AlbumDetail',
+    component: () => import(/* webpackChunkName: "category" */ '@/views/Detail/Album')
   },
   {
     path: '/category',

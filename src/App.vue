@@ -2,7 +2,7 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-17 11:01:05
- * @LastEditTime: 2022-01-17 18:00:40
+ * @LastEditTime: 2022-01-19 11:12:16
 -->
 <template>
   <NScrollbar>
@@ -15,7 +15,10 @@
         <NLayout has-sider class="layout">
           <Sider></Sider>
           <NLayout :native-scrollbar="true">
-            <NLayoutContent :native-scrollbar="true" style="margin: 60px">
+            <NLayoutContent
+              :native-scrollbar="true"
+              style="width:1200px; margin: 0 auto; min-height:100vh"
+            >
               <suspense>
                 <router-view />
               </suspense>

@@ -2,9 +2,12 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2022-01-13 13:24:18
- * @LastEditTime: 2022-01-13 17:45:08
+ * @LastEditTime: 2022-01-19 17:57:27
  */
 import axios from 'axios'
+import { useMessage } from 'naive-ui'
+
+let showMsg = true // 弹窗显示
 
 const INSTANCE = axios.create({
   baseURL: '',
@@ -26,6 +29,15 @@ INSTANCE.interceptors.response.use(
     return response.data
   },
   error => {
+    const status = error.response.status
+    if (status === 500) {
+      if (showMsg) {
+        window.$message.error(`请求状态码:${status}`)
+        showMsg = false
+      } else {
+        showMsg = true
+      }
+    }
     return Promise.reject(error)
   }
 )
