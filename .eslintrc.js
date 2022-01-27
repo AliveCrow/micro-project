@@ -20,5 +20,6 @@ module.exports = {
       'vars': 'all',
       'args': 'none'
     }],
+    "no-unreachable": [1], //该规则禁止在 return、throw、continue 和 break 语句后出现不可达代码。
   },
 };

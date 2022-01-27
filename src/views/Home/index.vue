@@ -4,7 +4,7 @@
  * @Date: 2022-01-14 10:40:20
  * @LastEditTime: 2022-01-19 10:31:46
 -->
-<template>
+<template >
   <div class="homepage">
     <NSpace justify="center" style="gap: 10px;">
       <Banner></Banner>

@@ -18,12 +18,14 @@
           <div v-for="item in list" :key="item.id" style="width: 285px">
             <NSpace>
               <img
+                class="album-avatar"
                 :width="90"
                 :src="`https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`"
+                @click="toPage('AlbumDetail', item.album)"
               />
               <NSpace vertical>
                 <NEllipsis class="link song-name" style="max-width: 180px;">
-                  <span @click="toPage('AlbumDetail', item.album)">{{ item.title }}</span>
+                  <span @click="getSongInfo(item.mid)">{{ item.title }}</span>
                 </NEllipsis>
                 <NEllipsis style="max-width: 180px;">
                   <span
@@ -31,7 +33,7 @@
                     v-for="singer in item.singer"
                     :key="singer.id"
                     @click="toPage('SingerDetail', singer)"
-                  >{{ useSingerList(singer, item.singer) }}</span>
+                  >{{ singerList(singer, item.singer) }}</span>
                 </NEllipsis>
               </NSpace>
             </NSpace>
@@ -42,43 +44,57 @@
   </NSpace>
 </template>
 <script setup>
-import { NAnchor, NSpace, NAnchorLink, NTabs, NTabPane, NCard, NImage, NEllipsis } from 'naive-ui'
-import api from '@/api'
-import { ref } from 'vue'
-import { useSingerList } from './hooks'
-import { useRouter, useRoute } from 'vue-router'
+import { NAnchor, NSpace, NAnchorLink, NTabs, NTabPane, NCard, NImage, NEllipsis } from "naive-ui";
+import { useInit, useRequest } from "./hooks";
+import { useSongStore } from "@/store/modules/songInfo";
+import usePlayer from "@/utils/createPlayer";
 
-const router = useRouter()
-const route = useRoute()
-const list = ref([])
-const AREA_CATEGORY = ['最新', '内地', '港台', '欧美', '韩国', '日本']
-const songsGet = async (index) => {
-  const res = await api.RecNewApi.newSongsGet(index)
+const songStore = useSongStore()
+const { list, AREA_CATEGORY, route, router, singerList, toPage } = useInit();
+const { newSongsGet, songInfoGet, songUrlGet } = useRequest()
+const res = await newSongsGet(0);
+list.value = res.data.list.splice(0, 8)
+const handleUpdateValue = async (val) => {
+  const res = await newSongsGet(val);
   list.value = res.data.list.splice(0, 8)
-}
-songsGet(0)
-const handleUpdateValue = (val) => {
-  songsGet(AREA_CATEGORY.findIndex(r => r === val))
-}
-const toPage = (name, item) => {
-  console.log('item: ', item);
-  router.push({
-    name, params: { mid: item.mid, name: item.name }, query: { mid: item.mid, name: item.name }
+};
+
+const getSongInfo = async (mid) => {
+  const res = await songInfoGet(mid)
+  songStore.songInfo = res.data
+  const urlRes = await songUrlGet(mid)
+  // songStore.songUrl = urlRes.data
+  usePlayer({
+    src: urlRes.data,
+    autoplay: true
   })
 }
 </script>
-<style  lang="scss">
-.n-tabs .n-tabs-tab-wrapper {
-  padding: 0 20px;
-}
+<style lang="scss">
 .new-song {
-  .n-card {
+  .n-tabs .n-tabs-tab-wrapper {
+    padding: 0 20px;
   }
+}
+</style>
+<style scoped lang="scss">
+.new-song {
   text-align: left;
+
   .title {
     font-size: 2.25rem;
     font-weight: 500;
     text-align: center;
+  }
+
+  .album-avatar {
+    transition: all .25s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    }
   }
 }
 </style>

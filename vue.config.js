@@ -11,14 +11,14 @@ const resolve = (dir) => path.join(__dirname, dir);
 module.exports = {
   devServer: {
     open: false,
-    port: 3333,
+    port: 3330,
     overlay: {
       warnings: false,
       errors: true,
     },
     proxy: {
       "/api": {
-        target: `http://localhost:3300`,
+        target: `http://localhost:3333`,
         changeOrigin: true,
         pathRewrite: {
           "^/api": "",
